@@ -4,6 +4,7 @@ import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/tpye";
 import { Input } from "./Input";
 import { DeleteButton } from "./DeleteButton";
+import { AllViewButton } from "./AllViewButton";
 
 export const TodoComponent = () => {
   const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
@@ -94,13 +95,11 @@ export const TodoComponent = () => {
             {todoMenu.filter((item) => item.completed === false).length} item
             left!
           </span>
-          <DeleteButton onDelete={handleDelete} />
+          <DeleteButton onDo={handleDelete} />
         </div>
 
         <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
-          <button onClick={handleAllButton} className="mr-2 border-2 p-1">
-            all
-          </button>
+          <AllViewButton onDo={handleAllButton} />
           <button onClick={handleActiveButton} className="mr-2 border-2 p-1">
             active
           </button>

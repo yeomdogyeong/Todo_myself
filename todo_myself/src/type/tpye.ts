@@ -3,3 +3,7 @@ export interface TodoType {
   text: string;
   completed: boolean;
 }
+
+export interface ButtonTypeVoid {
+  onDo: () => void;
+}

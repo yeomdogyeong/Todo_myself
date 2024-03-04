@@ -1,12 +1,9 @@
 import React from "react";
+import { ButtonTypeVoid } from "../type/tpye";
 
-interface DeleteButtonType {
-  onDelete: () => void;
-}
-
-export const DeleteButton: React.FC<DeleteButtonType> = ({ onDelete }) => {
+export const DeleteButton: React.FC<ButtonTypeVoid> = ({ onDo }) => {
   return (
-    <button className="border-2" onClick={onDelete}>
+    <button className="border-2" onClick={onDo}>
       Clear component
     </button>
   );
