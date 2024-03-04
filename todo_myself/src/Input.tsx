@@ -70,11 +70,22 @@ export const Input = () => {
       />
       <div className="w-full flex flex-col items-start justify-center">
         {filterTodo
-          ? filterTodo.map((item) => (
-              <span className="flex justify-start items-center" key={item.id}>
-                {item.text}
-              </span>
-            ))
+          ? filterTodo.map((item) =>
+              item.completed !== false ? (
+                <span
+                  className="flex justify-start items-center line-through"
+                  key={item.id}
+                >
+                  <MdOutlineCheckBox className="mr-2 cursor-pointer" />
+                  {item.text}
+                </span>
+              ) : (
+                <span className="flex justify-start items-center" key={item.id}>
+                  <MdOutlineCheckBoxOutlineBlank className="mr-2 cursor-pointer" />
+                  {item.text}
+                </span>
+              )
+            )
           : todoMenu.map((todo, idx) => (
               <div
                 key={todo.id}
