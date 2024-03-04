@@ -5,6 +5,7 @@ import { TodoType } from "../type/tpye";
 import { Input } from "./Input";
 import { DeleteButton } from "./DeleteButton";
 import { AllViewButton } from "./AllViewButton";
+import { ActiveButton } from "./ActiveButton";
 
 export const TodoComponent = () => {
   const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
@@ -100,9 +101,7 @@ export const TodoComponent = () => {
 
         <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
           <AllViewButton onDo={handleAllButton} />
-          <button onClick={handleActiveButton} className="mr-2 border-2 p-1">
-            active
-          </button>
+          <ActiveButton onDo={handleActiveButton} />
           <button onClick={handleCompletedButton} className="mr-2 border-2 p-1">
             completed
           </button>
