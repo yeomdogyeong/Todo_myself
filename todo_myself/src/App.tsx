@@ -1,10 +1,10 @@
 import "./App.css";
-import { Input } from "./Input";
+import { TodoComponent } from "./components/TodoComponent";
 function App() {
   return (
     <div className="flex flex-col justify-center items-center">
       Todos
-      <Input />
+      <TodoComponent />
     </div>
   );
 }

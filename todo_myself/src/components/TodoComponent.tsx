@@ -1,27 +1,18 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
+import { TodoType } from "../type/tpye";
+import { Input } from "./Input";
 
-interface TodoType {
-  id: number;
-  text: string;
-  completed: boolean;
-}
-
-export const Input = () => {
-  const [todoText, setTodoText] = useState<string>("");
+export const TodoComponent = () => {
   const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
   const [filterTodo, setFilterTodo] = useState<TodoType[] | null>(null);
 
-  const handleTodo = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && todoText) {
-      setTodoMenu([
-        ...todoMenu,
-        { id: todoMenu.length, text: todoText, completed: false },
-      ]);
-      setTodoText("");
-      e.preventDefault();
-    }
+  const addTodo = (text: string) => {
+    setTodoMenu([
+      ...todoMenu,
+      { id: todoMenu.length, text: text, completed: false },
+    ]);
   };
 
   const handleCheckBox = (idx: number) => {
@@ -33,10 +24,6 @@ export const Input = () => {
       completed: !todoMenu[idx].completed,
     };
     setTodoMenu(newCompleted);
-  };
-
-  const handleChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
-    setTodoText(e.target.value);
   };
 
   const handleDeleteButton = () => {
@@ -61,13 +48,7 @@ export const Input = () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <input
-        className="w-full border-2"
-        placeholder="click to write"
-        onChange={(e) => handleChangeEvent(e)}
-        onKeyDown={(e) => handleTodo(e)}
-        value={todoText}
-      />
+      <Input onAddText={addTodo} />
       <div className="w-full flex flex-col items-start justify-center">
         {filterTodo
           ? filterTodo.map((item) =>
