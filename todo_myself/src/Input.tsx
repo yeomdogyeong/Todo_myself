@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import { MdOutlineCheckBox } from "react-icons/md";
 
 interface TodoType {
   id: number;
@@ -30,7 +31,7 @@ export const Input = () => {
       text: todoMenu[idx].text,
       completed: !todoMenu[idx].completed,
     };
-    return newCompleted;
+    setTodoMenu(newCompleted);
   };
 
   const handleChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,15 +39,15 @@ export const Input = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col items-center min-h-screen">
       <input
-        className="border-2 w-[200px]"
+        className="w-full border-2"
         placeholder="click to write"
         onChange={(e) => handleChangeEvent(e)}
         onKeyDown={(e) => handleTodo(e)}
         value={todoText}
       />
-      <div className="w-[200px]">
+      <div className="w-full flex flex-col items-start justify-center">
         {todoMenu.map((todo, idx) => (
           <div
             key={todo.id}
@@ -56,20 +57,32 @@ export const Input = () => {
             {todoMenu[idx].completed === false ? (
               <>
                 <MdOutlineCheckBoxOutlineBlank className="mr-2 cursor-pointer" />{" "}
-                <div>{todo.text}</div>
+                <div key={todo.id}>{todo.text}</div>
               </>
             ) : (
-              <div>hi</div>
+              <>
+                <MdOutlineCheckBox className="mr-2 cursor-pointer" />{" "}
+                <div key={todo.id} className="line-through">
+                  {todo.text}
+                </div>
+              </>
             )}
           </div>
         ))}
-        <span>남은갯수:</span>
-        <div className="flex flex-row">
-          <span className="mr-2">all:</span>
-          <span className="mr-2">active:</span>
-          <span className="mr-2">completed:</span>
+        <div className="flex justify-between w-full px-4 text-sm">
+          <span>
+            {todoMenu.filter((item) => item.completed === false).length} item
+            left!
+          </span>
+          <button>Clear component</button>
+        </div>
+
+        <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
+          <button className="mr-2 border-2 p-1">all</button>
+          <button className="mr-2 border-2 p-1">active</button>
+          <button className="mr-2 border-2 p-1">completed</button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
