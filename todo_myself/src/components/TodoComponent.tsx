@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { TodoType } from "../type/tpye";
+import { TodoType } from "../type/type";
 import { Input } from "./Input";
 import { TodoFooter } from "./TodoFooter";
 import { FilteredButton } from "./FilteredButton";
 import { TodoList } from "./TodoList";
-
+import { useTodoStore } from "../store/useTodoStore";
 export const TodoComponent = () => {
   const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
   const [filterTodo, setFilterTodo] = useState<TodoType[] | null>(null);
-
+  // const { todo, addTodo } = useTodoStore();
   const addTodo = (text: string) => {
     setTodoMenu([
       ...todoMenu,

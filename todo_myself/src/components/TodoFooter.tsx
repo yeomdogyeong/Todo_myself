@@ -1,5 +1,5 @@
 import React from "react";
-import { TodoType } from "../type/tpye";
+import { TodoType } from "../type/type";
 
 export interface DeleteType {
   onDo: () => void;

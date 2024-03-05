@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
-import { TodoType } from "../type/tpye";
+import { TodoType } from "../type/type";
 
 interface TodoListType {
   todos: TodoType[];
@@ -41,10 +41,13 @@ export const TodoList: React.FC<TodoListType> = ({
           </div>
           <button
             onClick={(e) => {
+              //이벤트 버블링 중단
+              //삭제 버튼이 포함되어 있는 해당 Div의 클릭이벤트를 옮기지 않고, 버튼에 국한한다.
+              //onDelete만 실행, onCheck는 실행 X
               e.stopPropagation();
               onDelete(todo.id);
             }}
-            className="flex items-center justify-end ml-2 w-1/2 h-5 opacity-0 hover:opacity-100 hover:text-red-500 transition duration-200"
+            className="flex items-center justify-center w-1/3 h-5 opacity-0 hover:opacity-100 hover:text-red-500 transition duration-200"
           >
             x
           </button>
