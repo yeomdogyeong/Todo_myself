@@ -15,21 +15,24 @@ export const TodoList: React.FC<TodoListType> = ({ todos, onCheck }) => {
         <div
           key={todo.id}
           onClick={() => onCheck(idx)}
-          className="flex justify-start items-center"
+          className="flex justify-between items-center w-full"
         >
-          {todos[idx].completed === false ? (
-            <>
-              <MdOutlineCheckBoxOutlineBlank className="mr-2 cursor-pointer" />
-              <div key={todo.id}>{todo.text}</div>
-            </>
-          ) : (
-            <>
-              <MdOutlineCheckBox className="mr-2 cursor-pointer" />
-              <div key={todo.id} className="line-through">
-                {todo.text}
-              </div>
-            </>
-          )}
+          <div className="flex items-center">
+            {todos[idx].completed === false ? (
+              <>
+                <MdOutlineCheckBoxOutlineBlank className="mr-2 cursor-pointer" />
+                <div key={todo.id}>{todo.text}</div>
+              </>
+            ) : (
+              <>
+                <MdOutlineCheckBox className="mr-2 cursor-pointer" />
+                <div key={todo.id} className="line-through">
+                  {todo.text}
+                </div>
+              </>
+            )}
+          </div>
+          <button className="border-2 ml-2">x</button>
         </div>
       ))}
     </div>
