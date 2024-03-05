@@ -12,7 +12,7 @@ export const TodoComponent = () => {
   const addTodo = (text: string) => {
     setTodoMenu([
       ...todoMenu,
-      { id: todoMenu.length, text: text, completed: false },
+      { id: Date.now(), text: text, completed: false },
     ]);
   };
 
@@ -45,11 +45,20 @@ export const TodoComponent = () => {
     setFilterTodo(null);
   };
 
+  const handleTodoDelete = (id: number) => {
+    const newTodo = todoMenu.filter((item) => item.id !== id);
+    setTodoMenu(newTodo);
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <Input onAddText={addTodo} />
       <div className="w-full flex flex-col items-start justify-center">
-        <TodoList todos={filterTodo || todoMenu} onCheck={handleCheckBox} />
+        <TodoList
+          todos={filterTodo || todoMenu}
+          onCheck={handleCheckBox}
+          onDelete={handleTodoDelete}
+        />
         <TodoFooter onDo={handleDelete} items={todoMenu} />
 
         <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
