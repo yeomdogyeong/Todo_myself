@@ -8,7 +8,7 @@ import { useTodoStore } from "../store/useTodoStore";
 export const TodoComponent = () => {
   const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
   const [filterTodo, setFilterTodo] = useState<TodoType[] | null>(null);
-  // const { todo, addTodo } = useTodoStore();
+  const { todo } = useTodoStore();
   const addTodo = (text: string) => {
     setTodoMenu([
       ...todoMenu,
@@ -32,12 +32,12 @@ export const TodoComponent = () => {
   };
 
   const handleActiveButton = () => {
-    const activeTodo = todoMenu.filter((item) => item.completed === false);
+    const activeTodo = todo.filter((item) => item.completed === false);
     setFilterTodo(activeTodo);
   };
 
   const handleCompletedButton = () => {
-    const completedTodo = todoMenu.filter((item) => item.completed !== false);
+    const completedTodo = todo.filter((item) => item.completed !== false);
     setFilterTodo(completedTodo);
   };
 
