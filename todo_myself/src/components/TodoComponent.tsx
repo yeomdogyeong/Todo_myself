@@ -6,30 +6,8 @@ import { FilteredButton } from "./FilteredButton";
 import { TodoList } from "./TodoList";
 import { useTodoStore } from "../store/useTodoStore";
 export const TodoComponent = () => {
-  const [todoMenu, setTodoMenu] = useState<TodoType[]>([]);
   const [filterTodo, setFilterTodo] = useState<TodoType[] | null>(null);
-  const { todo } = useTodoStore();
-  const addTodo = (text: string) => {
-    setTodoMenu([
-      ...todoMenu,
-      { id: Date.now(), text: text, completed: false },
-    ]);
-  };
-
-  const handleCheckBox = (idx: number) => {
-    console.log("click");
-    const newCompleted = [...todoMenu];
-    newCompleted[idx] = {
-      id: todoMenu[idx].id,
-      text: todoMenu[idx].text,
-      completed: !todoMenu[idx].completed,
-    };
-    setTodoMenu(newCompleted);
-  };
-
-  const handleDelete = () => {
-    setTodoMenu([]);
-  };
+  const { todo, addTodo, clearTodo, deleteTodo, checkTodo } = useTodoStore();
 
   const handleActiveButton = () => {
     const activeTodo = todo.filter((item) => item.completed === false);
@@ -45,21 +23,16 @@ export const TodoComponent = () => {
     setFilterTodo(null);
   };
 
-  const handleTodoDelete = (id: number) => {
-    const newTodo = todoMenu.filter((item) => item.id !== id);
-    setTodoMenu(newTodo);
-  };
-
   return (
     <div className="flex flex-col items-center min-h-screen">
       <Input onAddText={addTodo} />
       <div className="w-full flex flex-col items-start justify-center">
         <TodoList
-          todos={filterTodo || todoMenu}
-          onCheck={handleCheckBox}
-          onDelete={handleTodoDelete}
+          todos={filterTodo || todo}
+          onCheck={checkTodo}
+          onDelete={deleteTodo}
         />
-        <TodoFooter onDo={handleDelete} items={todoMenu} />
+        <TodoFooter onDo={clearTodo} items={todo} />
 
         <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
           <FilteredButton
