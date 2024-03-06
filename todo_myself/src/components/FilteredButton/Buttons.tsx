@@ -9,7 +9,7 @@ export const Buttons: React.FC<FilteredButtonType> = ({ onDo, buttonName }) => {
     <>
       <button
         onClick={onDo}
-        className="mr-2 p-1 border-2 rounded-full hover:bg-gray-200 active:scale-95 transform transition"
+        className=" p-2 border w-full hover:text-white active:scale-95 transform transition"
       >
         {buttonName}
       </button>

@@ -24,17 +24,18 @@ export const TodoComponent = () => {
   };
 
   return (
-    <div className="w-1/3 flex flex-col justify-center items-center">
-      <Input onAddText={addTodo} />
-      <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-1/3 flex flex-col justify-between items-center h-screen">
+      <div className="flex flex-col justify-between items-center">
+        <Input onAddText={addTodo} />
         <TodoList
           todos={filterTodo || todo}
           onCheck={checkTodo}
           onDelete={deleteTodo}
         />
+      </div>
+      <div className="w-full flex flex-col items-center justify-center">
         <TodoFooter onDo={clearTodo} items={todo} />
-
-        <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
+        <div className="bg-gray-300 flex justify-evenly items-evenly w-full mb-4">
           <Buttons onDo={handleAllButton} buttonName="all" />
           <Buttons onDo={handleActiveButton} buttonName="active" />
           <Buttons onDo={handleCompletedButton} buttonName="completed" />
