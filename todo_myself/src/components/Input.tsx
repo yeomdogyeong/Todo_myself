@@ -20,8 +20,8 @@ export const Input: React.FC<InputProps> = ({ onAddText }) => {
   };
   return (
     <input
-      className="w-full border-2"
-      placeholder="click to write"
+      className="w-full border-2 p-4 m-6"
+      placeholder="Add my Todo"
       onChange={(e) => handleChangeEvent(e)}
       onKeyDown={(e) => handleTodo(e)}
       value={todoText}

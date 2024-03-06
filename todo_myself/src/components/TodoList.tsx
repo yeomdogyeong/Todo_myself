@@ -23,7 +23,7 @@ export const TodoList: React.FC<TodoListType> = ({
           className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded shadow"
         >
           <div className="flex items-center">
-            {todos[idx].completed === false ? (
+            {todo.completed === false ? (
               <>
                 <MdOutlineCheckBoxOutlineBlank className="mr-2 cursor-pointer text-blue-500" />
                 <div key={todo.id} className="text-gray-700">

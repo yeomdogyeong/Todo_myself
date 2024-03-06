@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TodoType } from "../type/type";
 import { Input } from "./Input";
 import { TodoFooter } from "./TodoFooter";
-import { FilteredButton } from "./FilteredButton";
+import { Buttons } from "./FilteredButton/Buttons";
 import { TodoList } from "./TodoList";
 import { useTodoStore } from "../store/useTodoStore";
 export const TodoComponent = () => {
@@ -24,9 +24,9 @@ export const TodoComponent = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="w-1/3 flex flex-col justify-center items-center">
       <Input onAddText={addTodo} />
-      <div className="w-full flex flex-col items-start justify-center">
+      <div className="w-full flex flex-col items-center justify-center">
         <TodoList
           todos={filterTodo || todo}
           onCheck={checkTodo}
@@ -35,11 +35,9 @@ export const TodoComponent = () => {
         <TodoFooter onDo={clearTodo} items={todo} />
 
         <div className="relative flex justify-evenly items-evenly flex-row w-full px-4">
-          <FilteredButton
-            onAll={handleAllButton}
-            onActive={handleActiveButton}
-            onCompleted={handleCompletedButton}
-          />
+          <Buttons onDo={handleAllButton} buttonName="all" />
+          <Buttons onDo={handleActiveButton} buttonName="active" />
+          <Buttons onDo={handleCompletedButton} buttonName="completed" />
         </div>
       </div>
     </div>

@@ -8,11 +8,11 @@ export interface DeleteType {
 
 export const TodoFooter: React.FC<DeleteType> = ({ onDo, items }) => {
   return (
-    <div className="flex justify-between w-full px-4 text-sm">
-      <span>
+    <div className="flex justify-between items-center w-full p-4 text-sm bg-gray-200">
+      <span className="">
         {items.filter((item) => item.completed === false).length} item left!
       </span>
-      <button className="border-2" onClick={onDo}>
+      <button className="border-2 p-2 rounded-lg" onClick={onDo}>
         Clear component
       </button>
     </div>
