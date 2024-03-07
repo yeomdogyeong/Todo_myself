@@ -10,8 +10,11 @@ export const DummyTodo: React.FC<DummyTodoType> = ({ onHover }) => {
     <div className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md">
       <div className="flex justify-evenly items-center" onMouseEnter={onHover}>
         <MdOutlineCheckBoxOutlineBlank className="mr-4 cursor-pointer text-pink-500" />
-        hover your mouse for tips!
+        hover for tips!
       </div>
+      <button className="text-[8px] ml-10 text-pink-500">
+        click to detail
+      </button>
       <button className="text-pink-500">x</button>
     </div>
   );
