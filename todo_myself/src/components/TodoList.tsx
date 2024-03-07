@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
-import { Modal } from "./Modal";
+import { Modal } from "./modal/Modal";
 import { debounce } from "lodash";
 import { DummyTodo } from "./dummyTodo/DummyTodo";
 
@@ -56,7 +56,10 @@ export const TodoList: React.FC<TodoListType> = ({
               )}
             </div>
             <div className="flex space-x-4">
-              <button className="text-[8px] ml-10 transition-transform duration-200 hover:scale-90 text-pink-500">
+              <button
+                onClick={(e) => e.stopPropagation()}
+                className="text-[8px] ml-10 transition-transform duration-200 hover:scale-90 text-pink-500"
+              >
                 click to detail
               </button>
               <button

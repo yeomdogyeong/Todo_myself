@@ -1,8 +1,7 @@
 import React from "react";
 import { FaArrowUp } from "react-icons/fa6";
 import { FaArrowDown } from "react-icons/fa6";
-import { FaArrowTurnDown } from "react-icons/fa6";
-import { DummyTodo } from "./dummyTodo/DummyTodo";
+import { DummyTodo } from "../dummyTodo/DummyTodo";
 
 interface ModalProps {
   isOpen: boolean;
