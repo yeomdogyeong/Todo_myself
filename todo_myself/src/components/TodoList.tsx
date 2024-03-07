@@ -3,6 +3,7 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
 import { Modal } from "./Modal";
+import { throttle } from "lodash";
 
 interface TodoListType {
   todos: TodoType[];
@@ -18,14 +19,10 @@ export const TodoList: React.FC<TodoListType> = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalText, setModalText] = useState<string>("");
 
-  const handleMouseHover = (text: string) => {
+  const handleMouseHover = throttle((text: string) => {
     setOpenModal(true);
     setModalText(text);
-  };
-
-  const handleMouseLeave = () => {
-    setOpenModal(false);
-  };
+  }, 5000);
 
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
@@ -35,12 +32,11 @@ export const TodoList: React.FC<TodoListType> = ({
         onClose={() => setOpenModal(false)}
       />
       {todos.length === 0 ? (
-        <div
-          className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md"
-          onMouseEnter={() => handleMouseHover("Here are some tips!")}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="flex justify-evenly items-center ">
+        <div className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md">
+          <div
+            className="flex justify-evenly items-center"
+            onMouseEnter={() => handleMouseHover("Here are some tips!")}
+          >
             <MdOutlineCheckBoxOutlineBlank className="mr-4 cursor-pointer text-pink-500" />
             hover your mouse for tips!
           </div>
