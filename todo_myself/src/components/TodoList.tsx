@@ -4,6 +4,7 @@ import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
 import { Modal } from "./Modal";
 import { debounce } from "lodash";
+import { DummyTodo } from "./dummyTodo/DummyTodo";
 
 interface TodoListType {
   todos: TodoType[];
@@ -17,31 +18,16 @@ export const TodoList: React.FC<TodoListType> = ({
   onDelete,
 }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [modalText, setModalText] = useState<string>("");
 
-  const handleMouseHover = debounce((text: string) => {
+  const handleMouseHover = debounce(() => {
     setOpenModal(true);
-    setModalText(text);
   }, 500);
 
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
-      <Modal
-        content={modalText}
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-      />
+      <Modal isOpen={openModal} onClose={() => setOpenModal(false)} />
       {todos.length === 0 ? (
-        <div className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md">
-          <div
-            className="flex justify-evenly items-center"
-            onMouseEnter={() => handleMouseHover("Here are some tips!")}
-          >
-            <MdOutlineCheckBoxOutlineBlank className="mr-4 cursor-pointer text-pink-500" />
-            hover your mouse for tips!
-          </div>
-          <button className="text-pink-500">x</button>
-        </div>
+        <DummyTodo onHover={handleMouseHover} />
       ) : (
         todos.map((todo, idx) => (
           <div
