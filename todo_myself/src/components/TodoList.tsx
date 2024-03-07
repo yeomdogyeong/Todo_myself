@@ -3,7 +3,7 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
 import { Modal } from "./Modal";
-import { throttle } from "lodash";
+import { debounce } from "lodash";
 
 interface TodoListType {
   todos: TodoType[];
@@ -19,10 +19,10 @@ export const TodoList: React.FC<TodoListType> = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalText, setModalText] = useState<string>("");
 
-  const handleMouseHover = throttle((text: string) => {
+  const handleMouseHover = debounce((text: string) => {
     setOpenModal(true);
     setModalText(text);
-  }, 5000);
+  }, 500);
 
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
