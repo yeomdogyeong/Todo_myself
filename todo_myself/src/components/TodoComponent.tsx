@@ -37,7 +37,7 @@ export const TodoComponent = () => {
   const time = `${now.getFullYear()}년${
     now.getMonth() + 1
   }월${now.getDate()}일${now.getHours()}시${now.getMinutes()}분`;
-
+  console.log(todo);
   return (
     <div className="bg-gray-100 p-4 w-1/2 flex flex-col justify-between items-center min-h-screen">
       <div className="w-full flex flex-col justify-between items-center">

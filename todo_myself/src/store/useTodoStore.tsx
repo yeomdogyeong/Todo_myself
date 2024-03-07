@@ -31,7 +31,7 @@ export const useTodoStore = create<TodoStore>((set) => ({
         ...newTodo[idx],
         completed: !newTodo[idx].completed,
       };
-      return { todo: newTodo, filterTodo: newTodo };
+      return { todo: newTodo };
     });
   },
   handleActive: () => {
