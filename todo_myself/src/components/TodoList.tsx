@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
@@ -21,7 +21,7 @@ export const TodoList: React.FC<TodoListType> = ({
 
   const handleMouseHover = debounce(() => {
     setOpenModal(true);
-  }, 500);
+  }, 1000);
 
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
@@ -29,10 +29,10 @@ export const TodoList: React.FC<TodoListType> = ({
       {todos.length === 0 ? (
         <DummyTodo onHover={handleMouseHover} />
       ) : (
-        todos.map((todo, idx) => (
+        todos.map((todo) => (
           <div
             key={todo.id}
-            onClick={() => onCheck(idx)}
+            onClick={() => onCheck(todo.id)}
             className="flex justify-between items-center w-full mb-2 p-2 bg-white shadow-md"
           >
             <div className="flex justify-evenly items-center ">
