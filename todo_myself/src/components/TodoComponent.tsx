@@ -28,7 +28,7 @@ export const TodoComponent = () => {
   }월${now.getDate()}일${now.getHours()}시${now.getMinutes()}분`;
   console.log(time);
   return (
-    <div className="w-1/2 flex flex-col justify-between items-center h-screen">
+    <div className="bg-gray-100 p-4 w-1/2 flex flex-col justify-between items-center min-h-screen">
       <div className="w-full flex flex-col justify-between items-center">
         <Input onAddText={addTodo} />
         <TodoList

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
+import { Modal } from "./Modal";
 
 interface TodoListType {
   todos: TodoType[];
@@ -14,13 +15,34 @@ export const TodoList: React.FC<TodoListType> = ({
   onCheck,
   onDelete,
 }) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalText, setModalText] = useState<string>("");
+
+  const handleMouseHover = (text: string) => {
+    setOpenModal(true);
+    setModalText(text);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenModal(false);
+  };
+
   return (
-    <div className="w-full flex flex-col items-start justify-center p-4 bg-pink-100">
+    <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
+      <Modal
+        content={modalText}
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
       {todos.length === 0 ? (
-        <div className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md">
+        <div
+          className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md"
+          onMouseEnter={() => handleMouseHover("Here are some tips!")}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className="flex justify-evenly items-center ">
             <MdOutlineCheckBoxOutlineBlank className="mr-4 cursor-pointer text-pink-500" />
-            add your todo!
+            hover your mouse for tips!
           </div>
           <button className="text-pink-500">x</button>
         </div>
@@ -29,7 +51,7 @@ export const TodoList: React.FC<TodoListType> = ({
           <div
             key={todo.id}
             onClick={() => onCheck(idx)}
-            className="flex justify-between items-center w-full mb-2 p-2 bg-white rounded-lg shadow-md"
+            className="flex justify-between items-center w-full mb-2 p-2 bg-white shadow-md"
           >
             <div className="flex justify-evenly items-center ">
               {todo.completed === false ? (
@@ -57,6 +79,9 @@ export const TodoList: React.FC<TodoListType> = ({
               </button>
               <button
                 onClick={(e) => {
+                  //이벤트 버블링 중단
+                  //삭제 버튼이 포함되어 있는 해당 Div의 클릭이벤트를 옮기지 않고, 버튼에 국한한다.
+                  //onDelete만 실행, onCheck는 실행 X
                   e.stopPropagation();
                   onDelete(todo.id);
                 }}

@@ -8,7 +8,7 @@ export interface DeleteType {
 
 export const TodoFooter: React.FC<DeleteType> = ({ onDo, items }) => {
   return (
-    <div className="flex justify-between items-center w-full p-4 text-sm bg-pink-100 rounded-lg shadow-sm">
+    <div className="flex border justify-between items-center w-full p-4 text-sm bg-pink-100 shadow-sm">
       <span className="text-pink-600">
         {items.filter((item) => item.completed === false).length} item left!
       </span>
