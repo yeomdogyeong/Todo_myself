@@ -23,6 +23,10 @@ export const TodoList: React.FC<TodoListType> = ({
   const handleMouseHover = debounce(() => {
     setOpenModal(true);
   }, 900);
+
+  const handleOnClick = () => {
+    setOpenModal(true);
+  };
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
       <Modal
@@ -44,7 +48,9 @@ export const TodoList: React.FC<TodoListType> = ({
                 <>
                   <MdOutlineCheckBoxOutlineBlank className="mr-4 cursor-pointer text-pink-500" />
                   <div key={todo.id} className="text-gray-700 text-[12px]">
-                    {todo.text}
+                    {todo.text.length > 10
+                      ? todo.text.substring(0, 9) + "..."
+                      : todo.text}
                   </div>
                 </>
               ) : (
@@ -65,7 +71,7 @@ export const TodoList: React.FC<TodoListType> = ({
                   e.stopPropagation();
                   //여기서 todomodal꺼내와야함
                   setModalChange("todo");
-                  handleMouseHover();
+                  handleOnClick();
                 }}
                 className="text-[8px] ml-10 transition-transform duration-200 hover:scale-90 text-pink-500"
               >
