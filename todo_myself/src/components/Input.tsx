@@ -8,7 +8,9 @@ export const Input: React.FC<InputProps> = ({ onAddText }) => {
   const [todoText, setTodoText] = useState<string>("");
 
   const handleTodo = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && todoText) {
+    //e.nativeEvent.isComposing는 True, false 총 두 번 동작하지만,
+    //true는 동작중일때 나오고, False는 입력값이 끝나면 실행되기 때문에 false로 조건문을 걸어준다.
+    if (e.key === "Enter" && todoText && e.nativeEvent.isComposing === false) {
       onAddText(todoText);
       setTodoText("");
       e.preventDefault();
