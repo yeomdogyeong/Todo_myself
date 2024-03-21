@@ -19,13 +19,16 @@ export const TodoList: React.FC<TodoListType> = ({
 }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalChange, setModalChange] = useState<string>("dummy");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const handleMouseHover = debounce(() => {
     setOpenModal(true);
   }, 900);
 
-  const handleOnClick = () => {
+  const handleOnClick = (id: number) => {
     setOpenModal(true);
+    setSelectedId(id);
+    console.log(id);
   };
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
@@ -33,6 +36,7 @@ export const TodoList: React.FC<TodoListType> = ({
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
         type={modalChange}
+        selectedId={selectedId}
       />
       {todos.length === 0 ? (
         <DummyTodo onHover={handleMouseHover} />
@@ -69,9 +73,8 @@ export const TodoList: React.FC<TodoListType> = ({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  //여기서 todomodal꺼내와야함
                   setModalChange("todo");
-                  handleOnClick();
+                  handleOnClick(todo.id);
                 }}
                 className="text-[8px] ml-10 transition-transform duration-200 hover:scale-90 text-pink-500"
               >
