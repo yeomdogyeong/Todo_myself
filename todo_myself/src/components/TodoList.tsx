@@ -3,7 +3,7 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { TodoType } from "../type/type";
 import { Modal } from "./modal/Modal";
-import { debounce, throttle } from "lodash";
+import { debounce } from "lodash";
 import { DummyTodo } from "./dummyTodo/DummyTodo";
 
 interface TodoListType {
@@ -18,13 +18,18 @@ export const TodoList: React.FC<TodoListType> = ({
   onDelete,
 }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalChange, setModalChange] = useState<string>("dummy");
 
   const handleMouseHover = debounce(() => {
     setOpenModal(true);
   }, 900);
   return (
     <div className="w-full flex flex-col items-start justify-center p-2 bg-pink-100">
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)} />
+      <Modal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        type={modalChange}
+      />
       {todos.length === 0 ? (
         <DummyTodo onHover={handleMouseHover} />
       ) : (
@@ -56,7 +61,12 @@ export const TodoList: React.FC<TodoListType> = ({
             </div>
             <div className="flex space-x-4">
               <button
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  //여기서 todomodal꺼내와야함
+                  setModalChange("todo");
+                  handleMouseHover();
+                }}
                 className="text-[8px] ml-10 transition-transform duration-200 hover:scale-90 text-pink-500"
               >
                 click to detail
