@@ -66,6 +66,8 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   handleAll: () => {
-    set({ filterTodo: null, filterStatus: "all" });
+    set((state) => {
+      return { filterTodo: state.todo, filterStatus: "all" };
+    });
   },
 }));

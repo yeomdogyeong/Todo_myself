@@ -23,7 +23,7 @@ export const Input: React.FC<InputProps> = ({ onAddText }) => {
   return (
     <input
       className="w-full p-4 m-6 rounded-lg shadow-sm bg-pink-100 outline-none"
-      placeholder="Add my Todo"
+      placeholder="할 일을 추가해보자!"
       onChange={(e) => handleChangeEvent(e)}
       onKeyDown={(e) => handleTodo(e)}
       value={todoText}
